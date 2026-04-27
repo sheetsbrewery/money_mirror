@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Money Mirror — Setup Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #fafaf8;
+    --gray: #6b6b6b;
+    --gray-light: #e8e8e5;
+    --accent: #1a1a1a;
+    --green: #1a7a4a;
+    --green-bg: #f0faf4;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* PAGE WRAPPER */
+  .page {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 72px 48px;
+  }
+
+  /* COVER */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--gray-light);
+    padding-bottom: 72px;
+    margin-bottom: 72px;
+  }
+
+  .cover-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .logo-mark {
+    font-family: 'DM Serif Display', serif;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  .badge {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+    border: 1px solid var(--gray-light);
+    padding: 5px 12px;
+    border-radius: 2px;
+  }
+
+  .cover-main {
+    margin-top: 120px;
+  }
+
+  .cover-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 24px;
+  }
+
+  .cover-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 64px;
+    line-height: 1.05;
+    color: var(--black);
+    margin-bottom: 32px;
+  }
+
+  .cover-title em {
+    font-style: italic;
+    color: var(--gray);
+  }
+
+  .cover-subtitle {
+    font-size: 17px;
+    color: var(--gray);
+    font-weight: 300;
+    max-width: 420px;
+    line-height: 1.6;
+  }
+
+  .cover-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-top: 48px;
+    border-top: 1px solid var(--gray-light);
+  }
+
+  .cover-time {
+    font-size: 12px;
+    color: var(--gray);
+    font-weight: 300;
+  }
+
+  .cover-time strong {
+    display: block;
+    font-size: 28px;
+    font-family: 'DM Serif Display', serif;
+    color: var(--black);
+    font-weight: normal;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  /* SECTION DIVIDER */
+  .section {
+    margin-bottom: 80px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gray-light);
+  }
+
+  /* STEP */
+  .step {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 0 28px;
+    margin-bottom: 56px;
+    position: relative;
+  }
+
+  .step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 23px;
+    top: 48px;
+    bottom: -56px;
+    width: 1px;
+    background: var(--gray-light);
+  }
+
+  .step-number {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--black);
+    flex-shrink: 0;
+    background: var(--white);
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-content {
+    padding-top: 10px;
+  }
+
+  .step-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--black);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .step-desc {
+    color: var(--gray);
+    font-weight: 300;
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+
+  /* ACTION BOX */
+  .action-box {
+    background: var(--black);
+    color: var(--white);
+    padding: 20px 24px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+  }
+
+  .action-box-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 8px;
+  }
+
+  .action-box-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.9);
+    font-weight: 300;
+  }
+
+  .action-box-text a {
+    color: #fff;
+    font-weight: 500;
+  }
+
+  /* URL BOX */
+  .url-box {
+    background: var(--gray-light);
+    padding: 14px 20px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: var(--black);
+    margin-bottom: 12px;
+    word-break: break-all;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .url-tag {
+    font-size: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+    white-space: nowrap;
+  }
+
+  /* TIP */
+  .tip {
+    background: var(--green-bg);
+    border-left: 2px solid var(--green);
+    padding: 14px 18px;
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 12px;
+  }
+
+  .tip-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 4px;
+  }
+
+  .tip-text {
+    font-size: 13px;
+    color: #1a4a30;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* WARNING */
+  .warning {
+    background: #fffbf0;
+    border-left: 2px solid #c8960a;
+    padding: 14px 18px;
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 12px;
+  }
+
+  .warning-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #8a6400;
+    margin-bottom: 4px;
+  }
+
+  .warning-text {
+    font-size: 13px;
+    color: #5a4000;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* SCREENSHOT PLACEHOLDER */
+  .screenshot {
+    background: var(--gray-light);
+    border-radius: 6px;
+    padding: 40px 24px;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .screenshot-label {
+    font-size: 11px;
+    color: var(--gray);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* WHAT YOU'LL SEE */
+  .what-see {
+    border: 1px solid var(--gray-light);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .what-see-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .what-see-text {
+    font-size: 13px;
+    color: var(--gray);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .what-see-text strong {
+    color: var(--black);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* SUCCESS BOX */
+  .success-box {
+    background: var(--green-bg);
+    border: 1px solid #b0dfc0;
+    border-radius: 6px;
+    padding: 28px 32px;
+    text-align: center;
+    margin-top: 48px;
+  }
+
+  .success-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .success-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+
+  .success-text {
+    font-size: 13px;
+    color: #2a5a3a;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* FAQ */
+  .faq-item {
+    border-top: 1px solid var(--gray-light);
+    padding: 20px 0;
+  }
+
+  .faq-q {
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--black);
+    margin-bottom: 8px;
+  }
+
+  .faq-a {
+    font-size: 13px;
+    color: var(--gray);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* MINI CHECKLIST */
+  .checklist {
+    list-style: none;
+    margin: 16px 0;
+  }
+
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--black);
+    font-weight: 300;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--gray-light);
+  }
+
+  .checklist li:last-child {
+    border-bottom: none;
+  }
+
+  .checklist-box {
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--gray-light);
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* PRINT */
+  @media print {
+    .cover { min-height: auto; }
+    .step:not(:last-child)::after { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-top">
+      <span class="logo-mark">Money Mirror</span>
+      <span class="badge">Setup Guide</span>
+    </div>
+
+    <div class="cover-main">
+      <p class="cover-eyebrow">Get started</p>
+      <h1 class="cover-title">Set up your<br><em>financial mirror</em><br>in 4 steps.</h1>
+      <p class="cover-subtitle">No technical knowledge required. Follow this guide and your AI-powered finance system will be ready in minutes.</p>
+    </div>
+
+    <div class="cover-footer">
+      <div class="cover-time">
+        <strong>15</strong>
+        minutes to complete
+      </div>
+      <div class="cover-time" style="text-align:right">
+        <strong>2</strong>
+        things you'll need
+      </div>
+    </div>
+  </div>
+
+  <!-- BEFORE YOU START -->
+  <div class="section">
+    <div class="section-label">Before you start</div>
+
+    <p style="font-size:14px; color:var(--gray); font-weight:300; margin-bottom:20px;">
+      You'll need two free accounts and two API keys. Don't worry — we'll walk you through getting each one. It takes about 5 minutes.
+    </p>
+
+    <ul class="checklist">
+      <li>
+        <div class="checklist-box"></div>
+        <span><strong style="font-weight:500">A Google account</strong> — you already have this if you use Gmail.</span>
+      </li>
+      <li>
+        <div class="checklist-box"></div>
+        <span><strong style="font-weight:500">A Notion account</strong> — free at notion.so. Takes 30 seconds to create.</span>
+      </li>
+      <li>
+        <div class="checklist-box"></div>
+        <span><strong style="font-weight:500">A Claude API key</strong> — from Anthropic. We'll show you how to get one below. Costs about $0.01 per month of transactions.</span>
+      </li>
+      <li>
+        <div class="checklist-box"></div>
+        <span><strong style="font-weight:500">A Notion Integration Secret</strong> — a private password for your Notion. We'll create it together in Step 2.</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- STEPS -->
+  <div class="section">
+    <div class="section-label">Setup steps</div>
+
+    <!-- STEP 1 -->
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h2 class="step-title">Copy the Google Sheet to your Drive</h2>
+        <p class="step-desc">This is the engine that runs everything. You only open it once during setup — after that, you never need to touch it again.</p>
+
+        <div class="action-box">
+          <div class="action-box-label">Do this</div>
+          <div class="action-box-text">Open the link below, then click <strong>File → Make a copy</strong>. Save it anywhere in your Google Drive.</div>
+        </div>
+
+        <div class="url-box">
+          <span>[YOUR GOOGLE SHEET LINK GOES HERE]</span>
+          <span class="url-tag">Sheet link</span>
+        </div>
+
+        <div class="what-see">
+          <div class="what-see-icon">👀</div>
+          <div class="what-see-text">
+            <strong>What you'll see</strong>
+            When you open the copy, you'll see a spreadsheet with a "💰 Money Mirror" menu in the top bar. That's the setup menu.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h2 class="step-title">Get your Claude API key</h2>
+        <p class="step-desc">This is the AI brain that reads your bank statements. You pay only for what you use — typically a few cents per month.</p>
+
+        <div class="action-box">
+          <div class="action-box-label">Do this</div>
+          <div class="action-box-text">
+            1. Go to <strong>console.anthropic.com</strong><br>
+            2. Create a free account (or log in)<br>
+            3. Click <strong>API Keys</strong> in the left menu<br>
+            4. Click <strong>Create Key</strong><br>
+            5. Copy the key — it starts with <strong>sk-ant-...</strong>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-label">Tip</div>
+          <div class="tip-text">Add $5 in credits when prompted. That's enough for thousands of transactions — you likely won't need to add more for months.</div>
+        </div>
+
+        <div class="what-see">
+          <div class="what-see-icon">🔑</div>
+          <div class="what-see-text">
+            <strong>What to copy</strong>
+            Your key looks like this: sk-ant-api03-xxxxxxxxxxxx...
+            Keep it private — don't share it with anyone.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h2 class="step-title">Create your Notion Integration</h2>
+        <p class="step-desc">This gives Money Mirror permission to write to your Notion — so it can automatically add your transactions to your dashboard.</p>
+
+        <div class="action-box">
+          <div class="action-box-label">Do this</div>
+          <div class="action-box-text">
+            1. Go to <strong>notion.so/my-integrations</strong><br>
+            2. Click <strong>+ New integration</strong><br>
+            3. Give it any name (e.g. "Money Mirror")<br>
+            4. Select your workspace from the dropdown<br>
+            5. Click <strong>Save</strong><br>
+            6. Copy the <strong>Internal Integration Secret</strong> — it starts with <strong>secret_...</strong>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-label">Tip</div>
+          <div class="tip-text">Think of this like a private key to your Notion. Only you have it. Money Mirror uses it to write your transactions, and nothing else.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h2 class="step-title">Run the setup wizard</h2>
+        <p class="step-desc">This is the last step. The wizard creates your entire Notion workspace automatically — no manual setup needed.</p>
+
+        <div class="action-box">
+          <div class="action-box-label">Do this</div>
+          <div class="action-box-text">
+            1. Open your copy of the Google Sheet<br>
+            2. Click <strong>💰 Money Mirror</strong> in the top menu bar<br>
+            3. Click <strong>🚀 Run Setup</strong><br>
+            4. A small window will appear — paste your two keys<br>
+            5. Click <strong>Set Up My Money Mirror</strong><br>
+            6. Wait about 30 seconds
+          </div>
+        </div>
+
+        <div class="warning">
+          <div class="warning-label">Important</div>
+          <div class="warning-text">If Google asks for permission to run the script, click <strong>Allow</strong>. This is normal — it's asking permission to connect to Notion and Claude on your behalf.</div>
+        </div>
+
+        <div class="what-see">
+          <div class="what-see-icon">✅</div>
+          <div class="what-see-text">
+            <strong>When it's done</strong>
+            You'll see a message with a link to your new Notion dashboard. Click it — your Money Mirror is ready.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success-box">
+      <div class="success-icon">🪞</div>
+      <div class="success-title">You're all set.</div>
+      <div class="success-text">Your Money Mirror is running. Every 10 minutes it checks for new bank statements you've uploaded or pasted. Your dashboard updates automatically.</div>
+    </div>
+  </div>
+
+  <!-- HOW TO USE -->
+  <div class="section">
+    <div class="section-label">How to use it every month</div>
+
+    <p style="font-size:14px; color:var(--gray); font-weight:300; margin-bottom:28px;">Once setup is done, using Money Mirror takes about 2 minutes per month. Here's all you do:</p>
+
+    <div class="step">
+      <div class="step-number" style="font-size:14px; font-family:'DM Sans',sans-serif; font-weight:500;">A</div>
+      <div class="step-content">
+        <h2 class="step-title" style="font-size:17px;">Download your bank statement</h2>
+        <p class="step-desc">Go to your bank's website or app, download your monthly statement. Any format works: CSV, XLSX, PDF, or even a screenshot.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number" style="font-size:14px; font-family:'DM Sans',sans-serif; font-weight:500;">B</div>
+      <div class="step-content">
+        <h2 class="step-title" style="font-size:17px;">Drop it in your Money Mirror Inbox</h2>
+        <p class="step-desc">Upload the file to the <strong>Money Mirror Inbox</strong> folder in your Google Drive. That's it — you're done.</p>
+        <div class="tip">
+          <div class="tip-label">Alternatively</div>
+          <div class="tip-text">You can also copy and paste your transactions directly into the <strong>AI Inbox</strong> page in Notion. Both methods work.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-number" style="font-size:14px; font-family:'DM Sans',sans-serif; font-weight:500;">C</div>
+      <div class="step-content">
+        <h2 class="step-title" style="font-size:17px;">Wait 10 minutes, then check your dashboard</h2>
+        <p class="step-desc">The AI reads your statement, categorizes every transaction, and updates your Notion dashboard automatically. Open Money Mirror in Notion to see your results.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="section">
+    <div class="section-label">Common questions</div>
+
+    <div class="faq-item">
+      <div class="faq-q">Is my financial data safe?</div>
+      <div class="faq-a">Yes. Your data lives in your own Google account and Notion. We never store or see your bank statements. The AI reads your file, categorizes it, and your data goes directly into your personal Notion — not ours.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">How much does the Claude API cost?</div>
+      <div class="faq-a">Typically $0.01–0.05 per month of transactions. A $5 credit will last most people over a year of normal use.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What banks are supported?</div>
+      <div class="faq-a">Any bank in the world. As long as you can export a CSV, XLSX, or PDF — or take a screenshot — Money Mirror can read it.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">A transaction was categorized incorrectly. What do I do?</div>
+      <div class="faq-a">Open your Transactions database in Notion and update the Category field manually. It takes 5 seconds. The AI gets it right ~90% of the time.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">The setup didn't work. What now?</div>
+      <div class="faq-a">Check that both API keys are correct and don't have extra spaces. Make sure you clicked "Allow" when Google asked for permission. If it still doesn't work, email us at [YOUR EMAIL] and we'll fix it for you within 24 hours.</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="border-top: 1px solid var(--gray-light); padding-top: 32px; display:flex; justify-content:space-between; align-items:center;">
+    <span style="font-family:'DM Serif Display',serif; font-size:16px; color:var(--black);">Money Mirror</span>
+    <span style="font-size:12px; color:var(--gray); font-weight:300;">sheetsbrewery · Etsy Digital Products</span>
+  </div>
+
+</div>
+
+</body>
+</html>
